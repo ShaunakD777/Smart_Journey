@@ -168,7 +168,6 @@ Tables are created automatically on startup. To manage the schema with Alembic i
 
 ```bash
 cd frontend
-cp .env.example .env
 npm install
 npm run dev                      # http://localhost:3000
 ```
@@ -179,7 +178,7 @@ Open **http://localhost:3000**, create an account and plan a trip. Interactive A
 
 ## 🔑 Configuration
 
-All backend settings live in `backend/.env` (see [`backend/.env.example`](backend/.env.example)). The MCP server reads the same file.
+All settings live in a single file, `backend/.env` (see [`backend/.env.example`](backend/.env.example)). The MCP server reads the same file.
 
 | Variable | Required | Purpose |
 |---|---|---|
@@ -196,7 +195,7 @@ All backend settings live in `backend/.env` (see [`backend/.env.example`](backen
 
 ¹ At least one LLM provider key is required.
 
-The frontend reads `VITE_API_URL` from `frontend/.env` (default `http://localhost:8000`).
+The frontend needs no configuration for local development — it talks to the backend at `http://localhost:8000`. If the backend runs somewhere else, copy `frontend/.env.example` to `frontend/.env` and set `VITE_API_URL`.
 
 ---
 

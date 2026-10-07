@@ -12,7 +12,7 @@ import CurrencySection from './sections/CurrencySection'
 import VisaSection from './sections/VisaSection'
 import PackingSection from './sections/PackingSection'
 import { ArrowLeft, Send, Bot, User, Loader2, MessageSquare } from 'lucide-react'
-import { api } from '../api'
+import { api, BASE_URL } from '../api'
 
 interface CategoryViewProps {
   category: string
@@ -89,7 +89,6 @@ export default function CategoryView({ category, onBack }: CategoryViewProps) {
   const chatEndRef = useRef<HTMLDivElement>(null)
 
   const cleanDest = req.destination.split(',')[0].trim().toLowerCase()
-  const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
   const bgUrl = `${BASE_URL}/api/image?dest=${encodeURIComponent(cleanDest)}`
 
   useEffect(() => {

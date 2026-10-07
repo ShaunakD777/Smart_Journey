@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { BrainCircuit, Wrench, Route, CheckCircle2, AlertTriangle } from 'lucide-react'
 import LoadingSpinner from './LoadingSpinner'
+import { BASE_URL } from '../api'
 
 export interface AgentLog {
   type: 'thought' | 'tool' | 'tool_end' | 'routing' | 'done' | 'error'
@@ -46,7 +47,6 @@ export default function AgentReasoningTerminal({
     if (!sessionId || !aiModel) return
     
     // Connect to real SSE stream
-    const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
     const eventSource = new EventSource(`${BASE_URL}/api/plan/${sessionId}/stream?ai_model=${encodeURIComponent(aiModel)}&mode=${appMode || 'demo'}`)
     
     eventSource.onmessage = (event) => {

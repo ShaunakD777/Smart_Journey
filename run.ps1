@@ -7,7 +7,7 @@
     2. Starts PostgreSQL and Weaviate with docker compose.
     3. Creates backend/.venv and installs Python packages (again only when requirements.txt changes).
     4. Installs frontend packages (again only when package-lock.json changes).
-    5. Creates backend/.env and frontend/.env from the examples on first run.
+    5. Creates backend/.env from backend/.env.example on first run.
     6. Runs the backend (http://localhost:8000) and frontend (http://localhost:3000) together.
     Press Ctrl+C to stop both. The databases keep running; stop them with "docker compose down".
 
@@ -131,12 +131,6 @@ if (-not (Test-Path $backendEnv)) {
     $secret = [Convert]::ToBase64String($bytes).TrimEnd("=").Replace("+", "-").Replace("/", "_")
     (Get-Content $backendEnv) -replace '^SECRET_KEY=\s*$', "SECRET_KEY=$secret" | Set-Content -Encoding UTF8 $backendEnv
     Write-Ok "Created backend\.env from backend\.env.example"
-}
-
-$frontendEnv = Join-Path $FrontendDir ".env"
-if (-not (Test-Path $frontendEnv)) {
-    Copy-Item (Join-Path $FrontendDir ".env.example") $frontendEnv
-    Write-Ok "Created frontend\.env from frontend\.env.example"
 }
 
 $envValues = Read-DotEnv $backendEnv

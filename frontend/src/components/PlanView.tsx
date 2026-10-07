@@ -1,4 +1,5 @@
 import { useTrip } from '../context/TripContext'
+import { BASE_URL } from '../api'
 import { ErrorBoundary } from './ErrorBoundary'
 import FlightSection from './sections/FlightSection'
 import HotelSection from './sections/HotelSection'
@@ -28,7 +29,6 @@ export default function PlanView({ onShowPackingList }: PlanViewProps) {
   const { plan } = useTrip()
   const req = plan.request
   const cleanDest = req.destination.split(',')[0].trim().toLowerCase()
-  const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
   const bgUrl = `${BASE_URL}/api/image?dest=${encodeURIComponent(cleanDest)}`
 
   // Explicitly defined row 1: Itinerary, Flights, Hotels, Budget

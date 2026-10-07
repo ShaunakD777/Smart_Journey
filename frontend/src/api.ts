@@ -1,9 +1,9 @@
 import axios from 'axios'
 import type { GetPlanResponse, PlanTripResponse } from './types'
 
-// Reads from frontend/.env → VITE_API_URL=http://localhost:8000
-// Falls back to localhost:8000 if not set.
-const BASE_URL = (import.meta.env.VITE_API_URL as string) || 'http://localhost:8000'
+// Backend address. Defaults to the local backend, so frontend/.env is optional;
+// set VITE_API_URL there only when the backend runs somewhere else.
+export const BASE_URL = (import.meta.env.VITE_API_URL as string) || 'http://localhost:8000'
 
 // Centralized axios instance — all requests from the app should use this
 // so the JWT Authorization header is automatically injected.

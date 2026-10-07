@@ -10,7 +10,7 @@
 #   2. Starts PostgreSQL and Weaviate with docker compose.
 #   3. Creates backend/.venv and installs Python packages (again only when requirements.txt changes).
 #   4. Installs frontend packages (again only when package-lock.json changes).
-#   5. Creates backend/.env and frontend/.env from the examples on first run.
+#   5. Creates backend/.env from backend/.env.example on first run.
 #   6. Runs the backend (http://localhost:8000) and frontend (http://localhost:3000) together.
 #   Press Ctrl+C to stop both. The databases keep running; stop them with "docker compose down".
 #
@@ -133,11 +133,6 @@ if [ ! -f "$BACKEND_ENV" ]; then
     awk -v secret="$SECRET" '{ sub(/\r$/, "") } /^SECRET_KEY=[[:space:]]*$/ { print "SECRET_KEY=" secret; next } { print }' \
         "$BACKEND_DIR/.env.example" > "$BACKEND_ENV"
     ok "Created backend/.env from backend/.env.example"
-fi
-
-if [ ! -f "$FRONTEND_DIR/.env" ]; then
-    cp "$FRONTEND_DIR/.env.example" "$FRONTEND_DIR/.env"
-    ok "Created frontend/.env from frontend/.env.example"
 fi
 
 LLM_KEYS=""
